@@ -1,5 +1,5 @@
 //fetching the data and returning an promise;
-
+let isSort=false;
 async function data_fetch(url) {
     const response = await fetch(url);
     const responseJson = await response.json();
@@ -28,6 +28,7 @@ async function loadingDataAsPerCatagory(catagoryID='1000',catagoryClicked=false)
     if(catagoryClicked){
         const willDeactiveCatagory=document.getElementsByClassName('active');
         willDeactiveCatagory[0].classList.remove('active');
+        isSort=false;
     }
     // console.log(willDeactiveCatagory);
     // willDeactiveCatagory.classList.remove('active');
@@ -36,7 +37,7 @@ async function loadingDataAsPerCatagory(catagoryID='1000',catagoryClicked=false)
     const url=`https://openapi.programming-hero.com/api/videos/category/${catagoryID}`
     const catagoryData=await data_fetch(url);
     catagoryDataShow(catagoryData);
-    console.log(catagoryData);
+    // console.log(catagoryData);
 
 }
 
@@ -61,6 +62,15 @@ function timeConverter(second){
 function catagoryDataShow(catagoryData){
     const cardContainer=document.getElementById('card-container');
     const noContent=document.getElementById('no-content');
+
+    if(isSort){
+
+        catagoryData.sort((a,b)=>{
+            aViews=parseFloat(a.others.views);
+            bViews=parseFloat(b.others.views);
+            return bViews-aViews;
+            })
+    }
 
     if(catagoryData.length==0){
         noContent.innerHTML=``;
@@ -111,6 +121,14 @@ function catagoryDataShow(catagoryData){
 
 }
 
+function sortContent(){
+    isSort=true;
+    const catagoryID=document.getElementsByClassName('active')[0].id;
+    // console.log(catagoryID);
+    loadingDataAsPerCatagory(catagoryID);
+
+
+}
 
 
 
