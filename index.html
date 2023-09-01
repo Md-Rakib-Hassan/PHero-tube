@@ -7,6 +7,10 @@
     <title>PH Tube</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        *{
+            font-family: 'Inter', sans-serif;
+        }
         .btn{
             background-color: #FF1F3D;
             color: white;
@@ -24,13 +28,18 @@
             padding: 4px 16px;
 
         }
+        .active{
+            background-color: #FF1F3D;
+            color: white;
+        }
+
     </style>
 </head>
 <body class="max-w-7xl mx-auto md:px-5 px-2">
     <nav class="">
         <div class="flex justify-between py-8">
 
-        <img class="w-28 sm:w-auto" src="images/Logo.png" alt="">
+        <img class=" w-28 sm:w-auto" src="images/Logo.png" alt="">
         <button class="gray rounded-md font-medium text-xs sm:text-base">Sort by view</button>
         <button class="btn rounded-md font-medium text-xs sm:text-base lg:px-8">Blog</button>
 
@@ -42,6 +51,40 @@
     <div id="catagories" class="my-8 flex lg:gap-8 md:gap-5 gap-2 justify-center">
         
         
+
+    </div>
+
+    <div id="no-content">
+        
+    </div>
+
+    <div id="card-container" class=" grid lg:grid-cols-4 gap-5 md:grid-cols-2 grid-cols-1">
+
+<!--         
+        <div class="card space-y-5">
+            <div class="thamnail">
+                <img src="https://i.ibb.co/L1b6xSq/shape.jpg" alt="">
+                <p></p>
+            </div>
+            
+            <div class="thamnail-details flex gap-2">
+                <div class="profile-pic">
+                    <img class="rounded-full w-10" src="https://i.ibb.co/D9wWRM6/olivia.jpg" alt="">
+                </div>
+                <div class="title-profil-view space-y-2">
+                    <p class="font-bold text-lg">title Shape of You</p>
+                    <div class="channel flex gap-1.5 text-sm text-gray-600">
+                        <p>Olivia Mitchell</p>
+                        <img class="h-5 w-5" src="images/Badge.png" alt="">
+                    </div>
+                    <p class="view text-sm text-gray-600">100K Views</p>
+
+                </div>
+            </div>
+        </div>
+ -->
+
+
 
     </div>
 

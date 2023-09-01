@@ -13,11 +13,105 @@ async function catagoryLoading(){
     const catagoriesDiv=document.getElementById('catagories');
     catagories_data.forEach(catagory => {
 
-        catagoriesDiv.innerHTML+=`<button class="light_gray rounded-md font-medium text-xs sm:text-base">${catagory.category}</button>`
+        catagoriesDiv.innerHTML+=`<button id="${catagory.category_id}" onclick="loadingDataAsPerCatagory('${catagory.category_id}',true)" class="light_gray rounded-md font-medium text-xs sm:text-base">${catagory.category}</button>`;
         console.log(catagory.category);
         
     });
+    // catagoriesDiv.firstElementChild.focus();
+    loadingDataAsPerCatagory()
     
 }
+
+async function loadingDataAsPerCatagory(catagoryID='1000',catagoryClicked=false){
+    const willActiveCatagory=document.getElementById(catagoryID);
+
+    if(catagoryClicked){
+        const willDeactiveCatagory=document.getElementsByClassName('active');
+        willDeactiveCatagory[0].classList.remove('active');
+    }
+    // console.log(willDeactiveCatagory);
+    // willDeactiveCatagory.classList.remove('active');
+    willActiveCatagory.classList.add('active');
+    // let previousID=catagoryID||'1000';
+    const url=`https://openapi.programming-hero.com/api/videos/category/${catagoryID}`
+    const catagoryData=await data_fetch(url);
+    catagoryDataShow(catagoryData);
+    console.log(catagoryData);
+
+}
+
+
+// function timeConverter(second){
+//     second=parseInt(second);
+//     const day= Math.floor(second/86400);
+//     const hr= Math.floor((second-(day*86400))/3600);
+//     const min=Math.floor((second-(day*86400)-(hr*3600))/60)
+//     if(second>=86400)return `${day}days ${hr}hrs ${min} min ago`;
+//     else if(second<86400)return `${hr}hrs ${min} min ago`;
+//     else return ``
+// }
+
+function timeConverter(second){
+    const hr= Math.floor(parseInt(second)/3600);
+    const min=Math.floor((parseInt(second)-(hr*3600))/60)
+    if(second)return `${hr}hrs ${min} min ago`
+    else return ``
+}
+
+function catagoryDataShow(catagoryData){
+    const cardContainer=document.getElementById('card-container');
+    const noContent=document.getElementById('no-content');
+
+    if(catagoryData.length==0){
+        noContent.innerHTML=``;
+        cardContainer.innerHTML=``;
+        noContent.innerHTML+=`<div class="py-16"><img class="mx-auto" src="images/Icon.png" alt="">
+        <p class="text-3xl font-bold text-center">Oops!! Sorry, There is no <br class="hidden sm:block">content here</p>
+        </div>`
+
+    }
+    else{
+        noContent.innerHTML=``;
+        cardContainer.innerHTML=``;
+        catagoryData.forEach(cardInfo=>{
+
+            cardContainer.innerHTML+=`<div class="card space-y-5">
+            <div class="thamnail relative">
+                <div class="h-40 overflow-hidden"><img class="h-full w-full rounded-md" src="${cardInfo?.thumbnail}" alt=""></div>
+                
+                <p class="bg-black text-white rounded-md absolute bottom-2 right-2 text-[10px] py-0.5 ${cardInfo?.others?.posted_date ? 'px-2':'hidden'} ">${timeConverter(cardInfo?.others?.posted_date)}</p>
+            </div>
+            
+            <div class="thamnail-details flex gap-2">
+                <div class="profile-pic">
+                    <img class="rounded-full w-10 h-10" src="${cardInfo?.authors[0]?.profile_picture}" alt="">
+                </div>
+                <div class="title-profil-view space-y-1">
+                    <p class="font-bold text-lg">${cardInfo?.title}</p>
+                    <div class="channel flex gap-1.5 text-sm text-gray-600">
+                        <p>${cardInfo?.authors[0]?.profile_name}</p>
+                        <img class="h-5 w-5 ${cardInfo?.authors[0]?.verified ? '':'hidden'}" src="images/Badge.png" alt="">
+                    </div>
+                    <p class="view text-sm text-gray-600">${cardInfo?.others?.views} Views</p>
+    
+                </div>
+            </div>
+        </div>
+        `
+    
+            // console.log(cardInfo);
+        })
+
+    }
+
+    
+
+
+
+
+}
+
+
+
 
 catagoryLoading();
