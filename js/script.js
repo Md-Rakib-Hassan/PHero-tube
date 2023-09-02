@@ -1,5 +1,6 @@
 //fetching the data and returning an promise;
 let isSort=0;
+let noContentFlag=0;
 async function data_fetch(url) {
     const response = await fetch(url);
     const responseJson = await response.json();
@@ -29,6 +30,7 @@ async function loadingDataAsPerCatagory(catagoryID='1000',catagoryClicked=false)
         const willDeactiveCatagory=document.getElementsByClassName('active');
         willDeactiveCatagory[0].classList.remove('active');
         isSort=0;
+        noContentFlag=0;
         sortBtnColor(isSort);
     }
     // console.log(willDeactiveCatagory);
@@ -75,6 +77,7 @@ function catagoryDataShow(catagoryData){
     }
 
     if(catagoryData.length==0){
+        noContentFlag=1;
         noContent.innerHTML=``;
         cardContainer.innerHTML=``;
         noContent.innerHTML+=`<div class="py-16"><img class="mx-auto" src="images/Icon.png" alt="">
@@ -138,9 +141,12 @@ function sortBtnColor(isSort){
     }
 }
 
-function sortContent(){ 
-    isSort=1-isSort;
+function sortContent(){
+    if(!noContentFlag) {
+        isSort=1-isSort;
     sortBtnColor(isSort);
+    }
+    
     const catagoryID=document.getElementsByClassName('active')[0].id;
     // console.log(catagoryID);
     loadingDataAsPerCatagory(catagoryID);
