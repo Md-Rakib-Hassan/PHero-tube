@@ -1,5 +1,5 @@
 //fetching the data and returning an promise;
-let isSort=false;
+let isSort=0;
 async function data_fetch(url) {
     const response = await fetch(url);
     const responseJson = await response.json();
@@ -14,7 +14,7 @@ async function catagoryLoading(){
     catagories_data.forEach(catagory => {
 
         catagoriesDiv.innerHTML+=`<button id="${catagory.category_id}" onclick="loadingDataAsPerCatagory('${catagory.category_id}',true)" class="light_gray rounded-md font-medium text-xs sm:text-base">${catagory.category}</button>`;
-        console.log(catagory.category);
+        // console.log(catagory.category);
         
     });
     // catagoriesDiv.firstElementChild.focus();
@@ -24,11 +24,12 @@ async function catagoryLoading(){
 
 async function loadingDataAsPerCatagory(catagoryID='1000',catagoryClicked=false){
     const willActiveCatagory=document.getElementById(catagoryID);
-
+    // sortBtnColor(isSort);
     if(catagoryClicked){
         const willDeactiveCatagory=document.getElementsByClassName('active');
         willDeactiveCatagory[0].classList.remove('active');
-        isSort=false;
+        isSort=0;
+        sortBtnColor(isSort);
     }
     // console.log(willDeactiveCatagory);
     // willDeactiveCatagory.classList.remove('active');
@@ -36,6 +37,7 @@ async function loadingDataAsPerCatagory(catagoryID='1000',catagoryClicked=false)
     // let previousID=catagoryID||'1000';
     const url=`https://openapi.programming-hero.com/api/videos/category/${catagoryID}`
     const catagoryData=await data_fetch(url);
+    // sortBtnColor(isSort);
     catagoryDataShow(catagoryData);
     // console.log(catagoryData);
 
@@ -121,8 +123,24 @@ function catagoryDataShow(catagoryData){
 
 }
 
-function sortContent(){
-    isSort=true;
+function sortBtnColor(isSort){
+    const sort_btn=document.getElementById('sort-btn');
+    if(isSort){
+        sort_btn.classList.remove('gray');
+        sort_btn.classList.add('btn');
+        sort_btn.innerText='Sorted by view'
+    }
+    else{
+        sort_btn.classList.add('gray');
+        sort_btn.classList.remove('btn');
+        sort_btn.innerText='Sort by view'
+
+    }
+}
+
+function sortContent(){ 
+    isSort=1-isSort;
+    sortBtnColor(isSort);
     const catagoryID=document.getElementsByClassName('active')[0].id;
     // console.log(catagoryID);
     loadingDataAsPerCatagory(catagoryID);
