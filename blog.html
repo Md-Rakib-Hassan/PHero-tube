@@ -3,11 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PH Blog</title>
+    <title>PH Tube</title>
     <link rel="shortcut icon" href="images/fav.png" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        *{
+            font-family: 'Inter', sans-serif;
+        }
+        .btn{
+            background-color: #FF1F3D;
+            color: white;
+            padding: 4px 16px;
+        }
+        .gray{
+            background-color: rgba(37, 37, 37, 0.20);
+            color: #252525;
+            padding: 4px 16px;
+
+        }
+        .light_gray{
+            background-color: rgba(37, 37, 37, 0.15);
+            color: rgba(37, 37, 37, 0.70);
+            padding: 4px 16px;
+
+        }
+        .active{
+            background-color: #FF1F3D;
+            color: white;
+        }
+
+    </style>
+
 
 </head>
-<body>
+<body class="max-w-7xl mx-auto md:px-5 px-2">
+
+    <nav class="">
+        <div class="flex justify-between py-8">
+
+        <img class=" w-28 sm:w-auto" src="images/Logo.png" alt="">
+        <p class="font-bold lg:text-4xl md:text-2xl text-xl">Blog <span class="hidden sm:inline">Section</span> </p>
+        <a href="index.html"><button class="btn rounded-md font-medium text-xs sm:text-base lg:px-8">Home</button></a>
+        
+
+        </div>
+        <hr>
+        
+    </nav>
+
+    <main class="my-5 space-y-8">
+
+        <div class="first">
+
+            <h1 class="text-xl sm:text-2xl lg:text-3xl font-bold">1. Discuss the scope of 'var', 'let', and 'const'.</h1>
+
+            <div class="ans py-4 px-3 sm:px-8 text-justify">
+
+                <p>'var' is globally scoped or function scoped its mean if I declared a variable as 'var' in a function it will accessible from anywhere of that function and if I declared it any where without function then it hoisted the declaration at the top as undefined and accessible to anywhere. And it can be updated and redeclared as well.</p>
+        <p><br>
+            'let' is block scoped its mean if I declared a variable as 'let' then it only can accessible within that block. And it can be updated but it cannot be redeclared within same scoped.
+        </p><br>
+        <p>
+            'const' also a block scoped as like let but its value can not be changed after the initialization. Its maintain a constant value that given with the declaration.
+        </p>
+
+            </div>
+
+        
+
+        </div>
+
+
+        <div class="second">
+
+            <h1 class="text-xl sm:text-2xl lg:text-3xl font-bold">2. Tell us the use cases of null and undefined.</h1>
+
+            <p class="py-4 px-3 sm:px-8 text-justify">
+
+                If we declared a variable but not initialized the value or not declared the variable and want to access it then it gives undefined so undefined is used to represent an uninitialized or missing variable, where null means an empty value or a blank value. Usually, null use to represent an object or array that has no value, and the type of null is object so null is used to represent an object with no parameter or values and we also can give a variable value as null to understand that the value of that variable is empty like let x=null;
+            </p>
+        </div>
+
+        <div class="third">
+
+            <h1 class="text-xl sm:text-2xl lg:text-3xl font-bold">3. What do you mean by REST API?</h1>
+
+            <p class="py-4 px-3 sm:px-8 text-justify"></p>
+        </div>
+
+        
+
+
+    </main>
     
 </body>
 </html>
